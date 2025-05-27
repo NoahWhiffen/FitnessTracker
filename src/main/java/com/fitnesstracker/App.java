@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -14,16 +16,19 @@ public class App {
 
             switch (choice) {
                 case "1":
-                    addWorkout();
+                    addUser();
                     break;
                 case "2":
-                    viewAllWorkouts();
+                    addWorkout();
                     break;
                 case "3":
-                    deleteWorkout();
+                    viewAllWorkouts();
                     break;
                 case "4":
-                    viewWorkoutsByTrainer();
+                    deleteWorkout();
+                    break;
+                case "5":
+                    updateGoal();
                     break;
                 case "0":
                     exit = true;
@@ -37,27 +42,56 @@ public class App {
 
     private static void printMenu() {
         System.out.println("\n--- Fitness Tracker Menu ---");
-        System.out.println("1. Add Workout");
-        System.out.println("2. View All Workouts");
-        System.out.println("3. Delete Workout");
-        System.out.println("4. View Workouts by Trainer");
+        System.out.println("1. Add User");
+        System.out.println("2. Add Workout");
+        System.out.println("3. View All Workouts");
+        System.out.println("4. Delete Workout");
+        System.out.println("5. Update a Goal");
         System.out.println("0. Exit");
         System.out.print("Choose an option: ");
     }
 
-    private static void addWorkout() {
+    private static void addUser() {
+        System.out.println("Enter your name: ");
+        String name = scanner.nextLine();
+        System.out.println("Enter desired username: ");
+        String username = scanner.nextLine();
 
+        User user = new User(name, username);
+        // Come back and add a way to add to database
+    }
+
+    private static void addWorkout() {
+        System.out.println("Enter date of workout: ");
+        LocalDate date = scanner.nextLine();
+        System.out.println("Enter workout type: ");
+        String type = scanner.nextLine();
+        System.out.println("Enter duration of workout: ");
+        int duration = scanner.nextInt();
+        System.out.println("Enter exercises completed: ");
+        ArrayList<Exercise> exercises = scanner.nextLine();
     }
 
     private static void viewAllWorkouts() {
-
+        List<Workout> workouts = workoutService.getAllWorkouts();
+        if (workouts.isEmpty()) {
+            System.out.println("No workouts found.");
+        } else {
+            for (Workout workout : workouts) {
+                System.out.println("ID: " + workout.getWorkoutId()
+                                + " Date: " + workout.getDate() 
+                                + " Type: " + workout.getType()
+                                + " Duration (In Minutes): " + workout.getDuration()
+                                + " Exercises: " + workout.getExercises());
+            }
+        }
     }
 
     private static void deleteWorkout() {
 
     }
 
-    private static void viewWorkoutsByTrainer() {
-        
+    private static void updateGoal() {
+
     }
 }

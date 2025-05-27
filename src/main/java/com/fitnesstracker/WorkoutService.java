@@ -2,11 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class WorkoutService {
-    private final WorkoutDAO WorkoutDAO;
-
-    public WorkoutService(WorkoutDAO WorkoutDAO) {
-        this.WorkoutDAO = WorkoutDAO;
-    }
+    private final WorkoutDAO WorkoutDAO = new WorkoutDAO();
 
     public void createWorkout(LocalDate date, String type, int duration) {
         Workout workout = new Workout(date, type, duration);
@@ -30,6 +26,6 @@ public class WorkoutService {
     }
 
     public void addExerciseToWorkout(int workoutid, Exercise exercise) {
-        
+
     }
 }

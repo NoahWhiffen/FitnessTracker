@@ -4,30 +4,36 @@ public class Exercise {
     private String name;
     private int reps;
     private int sets;
-}
 
-// Getters
-public String getName() {
-    return name;
-}
+    public Exercise(String name, int reps, int sets) {
+        this.name = name;
+        this.reps = reps;
+        this.sets = sets;
+    }
 
-public int getReps() {
-    return reps;
-}
+    // Getters
+    public String getName() {
+        return name;
+    }
 
-public int getSets() {
-    return sets;
-}
+    public int getReps() {
+        return reps;
+    }
 
-// Setters
-public void setName(String name) {
-    this.name = name;
-}
+    public int getSets() {
+        return sets;
+    }
 
-public void setReps(int reps) {
-    this.reps = reps;
-}
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
 
-public void setSets(int sets) {
-    this.sets = sets;
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
+    }
 }

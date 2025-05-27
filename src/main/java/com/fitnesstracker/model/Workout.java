@@ -1,5 +1,3 @@
-package main.java.com.fitnesstracker;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 

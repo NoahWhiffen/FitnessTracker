@@ -1,5 +1,3 @@
-package main.java.com.fitnesstracker;
-
 public class Goal {
     private int goalId;
     private String description;

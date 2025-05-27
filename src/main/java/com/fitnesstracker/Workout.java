@@ -51,7 +51,7 @@ public class Workout {
         this.duration = duration;
     }
 
-    public ArrayList<Exercise> setExercises() {
+    public void setExercises(ArrayList<Exercise> exercises) {
         this.exercises = exercises;
     }
 

@@ -1,31 +1,34 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
+import com.fitnesstracker.dao.WorkoutDAO;
+import com.fitnesstracker.model.Workout;
 
 public class WorkoutService {
-    private final WorkoutDAO WorkoutDAO = new WorkoutDAO();
 
-    public void createWorkout(LocalDate date, String type, int duration) {
-        Workout workout = new Workout(date, type, duration);
-        WorkoutDAO.save(workout);
-    }
+    private WorkoutDAO workoutDAO = new WorkoutDAO();
 
-    public List<Workout> getWorkoutsByUser(int userId) {
-
-    }
-
-    public Workout getWorkoutbyId(int workoutId) {
-
+    public void addWorkout(Workout workout) {
+        if (workout.getWorkoutType().isEmpty()) {
+            throw new IllegalArgumentException("Workout type is required.");
+        }
+        workoutDAO.addWorkout(workout);
+        System.out.println("Workout added successfully with ID: " + workout.getWorkoutId());
     }
 
     public void updateWorkout(Workout workout) {
-
+        workoutDAO.updateWorkout(workout);
+        System.out.println("Workout updated successfully.");
     }
 
     public void deleteWorkout(int workoutId) {
-
+        workoutDAO.deleteWorkout(workoutId);
+        System.out.println("Workout deleted successfully.");
     }
 
-    public void addExerciseToWorkout(int workoutid, Exercise exercise) {
+    public List<Workout> getAllWorkouts() {
+        return workoutDAO.getAllWorkouts();
+    }
 
+    public List<Workout> getWorkoutsByTrainer(int trainerId) {
+        return workoutDAO.getWorkoutsByTrainer(trainerId);
     }
 }

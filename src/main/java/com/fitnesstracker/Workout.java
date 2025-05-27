@@ -34,7 +34,7 @@ public class Workout {
         return duration;
     }
 
-    public ArrayList<Exercises> getExercises() {
+    public ArrayList<Exercise> getExercises() {
         return exercises;
     }
 
@@ -51,7 +51,7 @@ public class Workout {
         this.duration = duration;
     }
 
-    public ArrayList<Exercises> setExercises() {
+    public ArrayList<Exercise> setExercises() {
         this.exercises = exercises;
     }
 

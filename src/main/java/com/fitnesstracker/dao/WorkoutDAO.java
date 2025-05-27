@@ -1,0 +1,91 @@
+import org.keyin.database.DatabaseConnection;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class WorkoutDAO {
+
+    // Add a Workout to the database
+    public void addWorkout(Workout workout) {
+        String sql = "INSERT INTO workouts (date, type, duration) VALUES (?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            pstmt.setDate(1, Date.valueOf(workout.getDate()));
+            pstmt.setString(2, workout.getType());
+            pstmt.setInt(3, workout.getDuration());
+
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                int generatedId = rs.getInt(1);
+                workout.setWorkoutId(generatedId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Update an existing Workout
+    public void updateWorkout(Workout workout) {
+        String sql = "UPDATE workouts SET date = ?, type = ?, duration = ? WHERE workout_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDate(1, Date.valueOf(workout.getDate()));
+            pstmt.setString(2, workout.getType());
+            pstmt.setInt(3, workout.getDuration());
+            pstmt.setInt(4, workout.getWorkoutId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Delete a workout by ID
+    public void deleteWorkout(int workoutId) {
+        String sql = "DELETE FROM workouts WHERE workout_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, workoutId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Get all workouts from DB
+    public List<Workout> getAllWorkouts() {
+        List<Workout> workouts = new ArrayList<>();
+        String sql = "SELECT * FROM workouts";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Workout workout = new Workout(
+                    rs.getDate("date").toLocalDate(),
+                    rs.getString("type"),
+                    rs.getInt("duration")
+                );
+                workout.setWorkoutId(rs.getInt("workout_id"));
+                workouts.add(workout);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return workouts;
+    }
+}

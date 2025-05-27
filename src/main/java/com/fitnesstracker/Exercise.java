@@ -1,5 +1,3 @@
-package main.java.com.fitnesstracker;
-
 public class Exercise {
     private String name;
     private int reps;

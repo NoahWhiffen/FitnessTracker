@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+package com.fitnesstracker.model;
 
+import java.util.ArrayList;
+import java.util.List;
 public class User {
     
     private int userId;

@@ -1,3 +1,5 @@
+package com.fitnesstracker.service;
+
 import java.util.List;
 import com.fitnesstracker.dao.WorkoutDAO;
 import com.fitnesstracker.model.Workout;
@@ -7,7 +9,7 @@ public class WorkoutService {
     private WorkoutDAO workoutDAO = new WorkoutDAO();
 
     public void addWorkout(Workout workout) {
-        if (workout.getWorkoutType().isEmpty()) {
+        if (workout.getType().isEmpty()) {
             throw new IllegalArgumentException("Workout type is required.");
         }
         workoutDAO.addWorkout(workout);

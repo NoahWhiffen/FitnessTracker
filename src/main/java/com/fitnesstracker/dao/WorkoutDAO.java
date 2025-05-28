@@ -1,18 +1,23 @@
+package com.fitnesstracker.dao;
+
+import com.fitnesstracker.model.Workout;
+
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutDAO {
 
     public void addWorkout(Workout workout) {
-        String sql = "INSERT INTO workout_classes (class_type, class_description, trainer_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO workouts (date, type, duration) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setString(1, workout.getWorkoutType());
-            pstmt.setString(2, workout.getWorkoutDescription());
-            pstmt.setInt(3, workout.getTrainerId());
+            pstmt.setDate(1, Date.valueOf(workout.getDate()));
+            pstmt.setString(2, workout.getType());
+            pstmt.setInt(3, workout.getDuration());
 
             pstmt.executeUpdate();
 
@@ -27,15 +32,16 @@ public class WorkoutDAO {
         }
     }
 
+
     public void updateWorkout(Workout workout) {
-        String sql = "UPDATE workout_classes SET class_type = ?, class_description = ?, trainer_id = ? WHERE class_id = ?";
+        String sql = "UPDATE workouts SET date = ?, type = ?, duration = ? WHERE workout_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, workout.getWorkoutType());
-            pstmt.setString(2, workout.getWorkoutDescription());
-            pstmt.setInt(3, workout.getTrainerId());
+            pstmt.setDate(1, Date.valueOf(workout.getDate()));
+            pstmt.setString(2, workout.getType());
+            pstmt.setInt(3, workout.getDuration());
             pstmt.setInt(4, workout.getWorkoutId());
 
             pstmt.executeUpdate();
@@ -46,7 +52,7 @@ public class WorkoutDAO {
     }
 
     public void deleteWorkout(int workoutId) {
-        String sql = "DELETE FROM workout_classes WHERE class_id = ?";
+        String sql = "DELETE FROM workouts WHERE workout_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -61,7 +67,7 @@ public class WorkoutDAO {
 
     public List<Workout> getAllWorkouts() {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT * FROM workout_classes";
+        String sql = "SELECT workout_id, date, type, duration FROM workouts";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -69,38 +75,11 @@ public class WorkoutDAO {
 
             while (rs.next()) {
                 Workout workout = new Workout(
-                        rs.getInt("class_id"),
-                        rs.getString("class_type"),
-                        rs.getString("class_description"),
-                        rs.getInt("trainer_id")
+                        rs.getDate("date").toLocalDate(),
+                        rs.getString("type"),
+                        rs.getInt("duration")
                 );
-                workouts.add(workout);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return workouts;
-    }
-
-    public List<Workout> getWorkoutsByTrainer(int trainerId) {
-        List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT * FROM workout_classes WHERE trainer_id = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, trainerId);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                Workout workout = new Workout(
-                        rs.getInt("class_id"),
-                        rs.getString("class_type"),
-                        rs.getString("class_description"),
-                        rs.getInt("trainer_id")
-                );
+                workout.setWorkoutId(rs.getInt("workout_id"));
                 workouts.add(workout);
             }
 

@@ -1,3 +1,5 @@
+package com.fitnesstracker.model;
+
 public class Goal {
     private int goalId;
     private String description;

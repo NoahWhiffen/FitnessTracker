@@ -1,3 +1,5 @@
+package com.fitnesstracker.model.Workout
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 

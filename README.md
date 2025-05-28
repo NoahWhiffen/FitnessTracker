@@ -11,16 +11,10 @@
 
 4. If you had any problems the QAP please explain what happened.
 
+### Note to self
 
+Duplicate classes: The compiler sees two versions of WorkoutDAO, Workout, User, etc.
 
+Bad source files: The file path doesn’t match the declared package.
 
-
-
-
-
-
-Fix App.java method calls and type mismatches.
-
-Convert String to LocalDate properly.
-
-Make sure method names and return types are consistent.
+Missing methods and variables: e.g., setWorkoutId() or userService not defined.

@@ -28,7 +28,4 @@ public class WorkoutService {
         return workoutDAO.getAllWorkouts();
     }
 
-    public List<Workout> getWorkoutsByTrainer(int trainerId) {
-        return workoutDAO.getWorkoutsByTrainer(trainerId);
-    }
 }

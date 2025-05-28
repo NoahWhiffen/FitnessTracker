@@ -4,13 +4,13 @@ public class User {
     
     private int userId;
     private String name;
-    private String email;
+    private String username;
     private ArrayList<Workout> workouts;
     private ArrayList<Goal> goals;
 
-    public User(String name, String email) {
+    public User(String name, String username) {
         this.name = name;
-        this.email = email;
+        this.username = username;
         this.goals = new ArrayList<>();
         this.workouts = new ArrayList<>();
     }
@@ -24,8 +24,8 @@ public class User {
         return name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public ArrayList<Goal> getGoals() {
@@ -41,8 +41,8 @@ public class User {
         this.name = name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     // Modifiers

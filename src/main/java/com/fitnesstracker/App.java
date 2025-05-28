@@ -1,5 +1,8 @@
+package com.fitnesstracker;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -88,10 +91,50 @@ public class App {
     }
 
     private static void deleteWorkout() {
-
+        System.out.println("Enter the ID of the workout you'd like to delete: ");
+        int workoutToDelete = scanner.nextInt();
+        workoutService.deleteWorkout(workoutToDelete);
     }
 
     private static void updateGoal() {
+        System.out.println("Enter your username: ");
+        String username = scanner.nextLine();
 
+        User user = workoutService.findUserByUsername();
+
+        if (user == null) {
+            System.out.println("User not found.");
+            return;
+        }
+
+        Goal goal = user.getGoals();
+
+        if (goal == null) {
+            System.out.println("No goal found for this user.");
+            return;
+        } else {
+            System.out.println("Current Goal Description: " + goal.getDescription());
+            System.out.println("Enter new description (leave blank to keep curent): ");
+            String description = scanner.nextLine();
+            if (!description.trim().isEmpty()) {
+                goal.setDescription(description);
+            }
+
+            System.out.println("Current Target: " + goal.getTarget());
+            System.out.println("Enter new target (leave blank to keep current)");
+            String target = scanner.nextLine();
+            if (!target.trim().isEmpty()) {
+                goal.setTarget(target);
+            }
+
+            System.out.println("Is the goal achieved? (true/false): ");
+            String achievedStr = scanner.nextLine();
+            if (!achievedStr.trim().isEmpty()) {
+            boolean achieved = Boolean.parseBoolean(achievedStr);
+            goal.setAchieved(achieved);
+        }
+
+        System.out.println("Goal updated successfully.");
+        }
     }
 }

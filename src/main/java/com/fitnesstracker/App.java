@@ -1,3 +1,7 @@
+import com.fitnesstracker.model.*;
+import com.fitnesstracker.service.WorkoutService;
+import com.fitnesstracker.service.UserService;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,19 +63,49 @@ public class App {
         String username = scanner.nextLine();
 
         User user = new User(name, username);
-        // Come back and add a way to add to database
+        userService.addUser(user);
+        System.out.println("User added successfully!");
     }
 
+
     private static void addWorkout() {
-        System.out.println("Enter date of workout: ");
-        LocalDate date = scanner.nextLine();
-        System.out.println("Enter workout type: ");
-        String type = scanner.nextLine();
-        System.out.println("Enter duration of workout: ");
-        int duration = scanner.nextInt();
-        System.out.println("Enter exercises completed: ");
-        ArrayList<Exercise> exercises = scanner.nextLine();
+        try {
+            System.out.print("Enter date of workout (YYYY-MM-DD): ");
+            String dateInput = scanner.nextLine();
+            LocalDate date = LocalDate.parse(dateInput);
+
+            System.out.print("Enter workout type: ");
+            String type = scanner.nextLine();
+
+            System.out.print("Enter duration of workout in minutes: ");
+            int duration = scanner.nextInt();
+            scanner.nextLine();
+
+            ArrayList<Exercise> exercises = new ArrayList<>();
+            System.out.print("Enter number of exercises: ");
+            int numExercises = scanner.nextInt();
+            scanner.nextLine();
+
+            for (int i = 0; i < numExercises; i++) {
+                System.out.print("Enter name of exercise #" + (i + 1) + ": ");
+                String name = scanner.nextLine();
+                System.out.print("Enter number of reps: ");
+                int reps = scanner.nextInt();
+                System.out.print("Enter number of sets: ");
+                int sets = scanner.nextInt();
+                scanner.nextLine();
+
+                exercises.add(new Exercise(name, reps, sets));
+            }
+
+            Workout workout = new Workout(date, type, duration);
+            workout.setExercises(exercises);
+            workoutService.addWorkout(workout);
+        } catch (Exception e) {
+            System.out.println("Error adding workout: " + e.getMessage());
+        }
     }
+
 
     private static void viewAllWorkouts() {
         List<Workout> workouts = workoutService.getAllWorkouts();
@@ -92,47 +126,49 @@ public class App {
         System.out.println("Enter the ID of the workout you'd like to delete: ");
         int workoutToDelete = scanner.nextInt();
         workoutService.deleteWorkout(workoutToDelete);
+        scanner.nextLine();
     }
 
     private static void updateGoal() {
-        System.out.println("Enter your username: ");
-        String username = scanner.nextLine();
+    System.out.println("Enter your username: ");
+    String username = scanner.nextLine();
 
-        User user = workoutService.findUserByUsername();
+    User user = userService.findUserByUsername(username);
 
-        if (user == null) {
-            System.out.println("User not found.");
-            return;
-        }
-
-        Goal goal = user.getGoals();
-
-        if (goal == null) {
-            System.out.println("No goal found for this user.");
-            return;
-        } else {
-            System.out.println("Current Goal Description: " + goal.getDescription());
-            System.out.println("Enter new description (leave blank to keep curent): ");
-            String description = scanner.nextLine();
-            if (!description.trim().isEmpty()) {
-                goal.setDescription(description);
-            }
-
-            System.out.println("Current Target: " + goal.getTarget());
-            System.out.println("Enter new target (leave blank to keep current)");
-            String target = scanner.nextLine();
-            if (!target.trim().isEmpty()) {
-                goal.setTarget(target);
-            }
-
-            System.out.println("Is the goal achieved? (true/false): ");
-            String achievedStr = scanner.nextLine();
-            if (!achievedStr.trim().isEmpty()) {
-            boolean achieved = Boolean.parseBoolean(achievedStr);
-            goal.setAchieved(achieved);
-        }
-
-        System.out.println("Goal updated successfully.");
-        }
+    if (user == null) {
+        System.out.println("User not found.");
+        return;
     }
+
+    List<Goal> goals = user.getGoals();
+    if (goals.isEmpty()) {
+        System.out.println("No goals found for this user.");
+        return;
+    }
+
+    Goal goal = goals.get(0); // Just editing the first goal for now
+    System.out.println("Current Goal Description: " + goal.getDescription());
+    System.out.println("Enter new description (leave blank to keep current): ");
+    String description = scanner.nextLine();
+    if (!description.trim().isEmpty()) {
+        goal.setDescription(description);
+    }
+
+    System.out.println("Current Target: " + goal.getTarget());
+    System.out.println("Enter new target (leave blank to keep current): ");
+    String target = scanner.nextLine();
+    if (!target.trim().isEmpty()) {
+        goal.setTarget(target);
+    }
+
+    System.out.println("Is the goal achieved? (true/false): ");
+    String achievedStr = scanner.nextLine();
+    if (!achievedStr.trim().isEmpty()) {
+        boolean achieved = Boolean.parseBoolean(achievedStr);
+        goal.setAchieved(achieved);
+    }
+
+    System.out.println("Goal updated successfully.");
+}
+
 }

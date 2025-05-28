@@ -1,4 +1,5 @@
 import com.fitnesstracker.model.Workout;
+import com.fitnesstracker.dao.DatabaseConnection;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -20,10 +21,6 @@ public class WorkoutDAO {
             pstmt.executeUpdate();
 
             ResultSet rs = pstmt.getGeneratedKeys();
-            if (rs.next()) {
-                int generatedId = rs.getInt(1);
-                workout.setWorkoutId(generatedId);
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();

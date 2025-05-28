@@ -10,3 +10,17 @@
 3. Outline the needed dependencies. Where did you get them from?
 
 4. If you had any problems the QAP please explain what happened.
+
+
+
+
+
+
+
+
+
+Fix App.java method calls and type mismatches.
+
+Convert String to LocalDate properly.
+
+Make sure method names and return types are consistent.

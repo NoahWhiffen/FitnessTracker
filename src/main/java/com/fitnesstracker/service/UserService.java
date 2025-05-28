@@ -1,3 +1,5 @@
+package com.fitnesstracker.model;
+
 import com.fitnesstracker.model.User;
 
 import java.util.ArrayList;

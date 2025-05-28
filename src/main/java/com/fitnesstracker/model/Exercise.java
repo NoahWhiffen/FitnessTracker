@@ -1,3 +1,4 @@
+package com.fitnesstracker.model;
 public class Exercise {
     private String name;
     private int reps;

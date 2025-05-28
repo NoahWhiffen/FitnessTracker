@@ -1,3 +1,5 @@
+package com.fitnesstracker.dao;
+
 import com.fitnesstracker.model.Workout;
 import com.fitnesstracker.dao.DatabaseConnection;
 

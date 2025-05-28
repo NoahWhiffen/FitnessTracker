@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class App {
 
     private static WorkoutService workoutService = new WorkoutService();
+    private static UserService userService = new UserService();
     private static Scanner scanner = new Scanner(System.in);
     
     public static void main(String[] args) {

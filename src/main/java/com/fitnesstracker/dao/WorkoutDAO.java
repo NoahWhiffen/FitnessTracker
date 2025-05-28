@@ -62,28 +62,28 @@ public class WorkoutDAO {
         }
     }
 
-    public List<Workout> getAllWorkouts() {
-        List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT workout_id, date, type, duration FROM workouts";
+public List<Workout> getAllWorkouts() {
+    List<Workout> workouts = new ArrayList<>();
+    String sql = "SELECT workout_id, date, type, duration FROM workouts";
 
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+    try (Connection conn = DatabaseConnection.getConnection();
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
 
-            while (rs.next()) {
-                Workout workout = new Workout(
-                        rs.getDate("date").toLocalDate(),
-                        rs.getString("type"),
-                        rs.getInt("duration")
-                );
-                workout.setWorkoutId(rs.getInt("workout_id"));
-                workouts.add(workout);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            Workout workout = new Workout(
+                    rs.getInt("workout_id"),
+                    rs.getDate("date").toLocalDate(),
+                    rs.getString("type"),
+                    rs.getInt("duration")
+            );
+            workouts.add(workout);
         }
 
-        return workouts;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return workouts;
+}
 }

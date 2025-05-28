@@ -17,6 +17,15 @@ public class Workout {
         this.exercises = new ArrayList<>();
     }
 
+    // Package-private constructor used by DAO to create full Workout including ID
+    Workout(int workoutId, LocalDate date, String type, int duration) {
+        this.workoutId = workoutId;
+        this.date = date;
+        this.type = type;
+        this.duration = duration;
+        this.exercises = new ArrayList<>();
+    }
+
     // Getters
     public int getWorkoutId() {
         return workoutId;

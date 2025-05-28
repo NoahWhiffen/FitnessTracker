@@ -1,3 +1,5 @@
+package com.fitnesstracker;
+
 import com.fitnesstracker.model.*;
 import com.fitnesstracker.service.WorkoutService;
 import com.fitnesstracker.service.UserService;

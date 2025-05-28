@@ -1,4 +1,4 @@
-package com.fitnesstracker.model;
+package com.fitnesstracker.service;
 
 import com.fitnesstracker.model.User;
 

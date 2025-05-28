@@ -1,5 +1,3 @@
-package com.fitnesstracker.dao;
-
 import com.fitnesstracker.model.Workout;
 
 import java.sql.*;

@@ -1,5 +1,3 @@
-package com.fitnesstracker.service;
-
 import java.util.List;
 import com.fitnesstracker.dao.WorkoutDAO;
 import com.fitnesstracker.model.Workout;

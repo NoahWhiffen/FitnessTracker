@@ -92,10 +92,10 @@ public class App {
             for (int i = 0; i < numExercises; i++) {
                 System.out.print("Enter name of exercise #" + (i + 1) + ": ");
                 String name = scanner.nextLine();
-                System.out.print("Enter number of reps: ");
-                int reps = scanner.nextInt();
                 System.out.print("Enter number of sets: ");
                 int sets = scanner.nextInt();
+                System.out.print("Enter number of reps per set: ");
+                int reps = scanner.nextInt();
                 scanner.nextLine();
 
                 exercises.add(new Exercise(name, reps, sets));
@@ -172,6 +172,5 @@ public class App {
     }
 
     System.out.println("Goal updated successfully.");
-}
-
+    }
 }

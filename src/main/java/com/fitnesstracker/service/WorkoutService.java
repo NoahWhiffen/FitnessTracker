@@ -6,7 +6,15 @@ import com.fitnesstracker.model.Workout;
 
 public class WorkoutService {
 
-    private WorkoutDAO workoutDAO = new WorkoutDAO();
+    private WorkoutDAO workoutDAO;
+
+    public WorkoutService() {
+        this.workoutDAO = new WorkoutDAO();
+    }
+
+    public WorkoutService(WorkoutDAO workoutDAO) {
+        this.workoutDAO = workoutDAO;
+    }
 
     public void addWorkout(Workout workout) {
         if (workout.getType().isEmpty()) {

@@ -20,7 +20,7 @@ Here are three examples from my code that demonstrate clean coding principles, s
 
 <!-- Screenshot: Meaningful Names Example -->  
 <p align="center">
-  <img src="screenshots/meaningful-names.jpg" alt="Meaningful Names Screenshot" width="300" height="300" object-fit="contain"/>
+  <img src="screenshots/meaningful-names.jpg" alt="Meaningful Names Screenshot" width="400" height="300" object-fit="contain"/>
 </p>
 
 **Error Handling and Input Validation:**  
@@ -29,8 +29,8 @@ Here are three examples from my code that demonstrate clean coding principles, s
 
 <!-- Screenshots: Error Handling Example -->  
 <p align="center">
-  <img src="screenshots/error-handling-1.jpg" alt="Error Handling Screenshot 1" width="500" height="200" object-fit="contain"/>
-  <img src="screenshots/error-handling-2.jpg" alt="Error Handling Screenshot 2" width="500" height="200" object-fit="contain"/>
+  <img src="screenshots/error-handling-1.jpg" alt="Error Handling Screenshot 1" width="600" height="200" object-fit="contain"/>
+  <img src="screenshots/error-handling-2.jpg" alt="Error Handling Screenshot 2" width="600" height="200" object-fit="contain"/>
 </p>
 
 **Encapsulation:**  

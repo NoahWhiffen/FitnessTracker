@@ -29,6 +29,10 @@ public class Goal {
     }
 
     // Setters
+    public void setGoalId(int goalId) {
+        this.goalId = goalId;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

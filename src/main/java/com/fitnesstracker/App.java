@@ -36,6 +36,9 @@ public class App {
                     deleteWorkout();
                     break;
                 case "5":
+                    addGoal();
+                    break;
+                case "6":
                     updateGoal();
                     break;
                 case "0":
@@ -54,11 +57,13 @@ public class App {
         System.out.println("2. Add Workout");
         System.out.println("3. View All Workouts");
         System.out.println("4. Delete Workout");
-        System.out.println("5. Update a Goal");
+        System.out.println("5. Add a Goal");
+        System.out.println("6. Update a Goal");
         System.out.println("0. Exit");
         System.out.print("Choose an option: ");
     }
 
+    // Option 1
     private static void addUser() {
         System.out.println("Enter your name: ");
         String name = scanner.nextLine();
@@ -70,7 +75,7 @@ public class App {
         System.out.println("User added successfully!");
     }
 
-
+    // Option 2
     private static void addWorkout() {
         try {
             System.out.print("Enter date of workout (YYYY-MM-DD): ");
@@ -85,20 +90,29 @@ public class App {
             scanner.nextLine();
 
             ArrayList<Exercise> exercises = new ArrayList<>();
-            System.out.print("Enter number of exercises: ");
-            int numExercises = scanner.nextInt();
-            scanner.nextLine();
+            System.out.println("Enter number of exercises (or type 'done' to finish):");
 
-            for (int i = 0; i < numExercises; i++) {
-                System.out.print("Enter name of exercise #" + (i + 1) + ": ");
-                String name = scanner.nextLine();
-                System.out.print("Enter number of sets: ");
-                int sets = scanner.nextInt();
-                System.out.print("Enter number of reps per set: ");
-                int reps = scanner.nextInt();
-                scanner.nextLine();
+            while (true) {
+                String input = scanner.nextLine().trim();
+                if (input.equalsIgnoreCase("done")) {
+                    break;
+                }
+                try {
+                    int numExercises = Integer.parseInt(input);
+                    for (int i = 0; i < numExercises; i++) {
+                        System.out.print("Enter name of exercise #" + (i + 1) + ": ");
+                        String name = scanner.nextLine();
+                        System.out.print("Enter number of sets: ");
+                        int sets = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Enter number of reps per set: ");
+                        int reps = Integer.parseInt(scanner.nextLine());
 
-                exercises.add(new Exercise(name, reps, sets));
+                        exercises.add(new Exercise(name, reps, sets));
+                    }
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a number or 'done'.");
+                }
             }
 
             Workout workout = new Workout(date, type, duration);
@@ -109,7 +123,7 @@ public class App {
         }
     }
 
-
+    // Option 3
     private static void viewAllWorkouts() {
         List<Workout> workouts = workoutService.getAllWorkouts();
         if (workouts.isEmpty()) {
@@ -125,6 +139,7 @@ public class App {
         }
     }
 
+    // Option 4
     private static void deleteWorkout() {
         System.out.println("Enter the ID of the workout you'd like to delete: ");
         int workoutToDelete = scanner.nextInt();
@@ -132,6 +147,33 @@ public class App {
         scanner.nextLine();
     }
 
+    // Option 5
+    private static void addGoal() {
+        System.out.println("Enter your username: ");
+        String username = scanner.nextLine();
+
+        User user = userService.findUserByUsername(username);
+        if (user == null) {
+            System.out.println("User not found.");
+            return;
+        }
+        
+        System.out.println("Add goal description: ");
+        String description = scanner.nextLine();
+
+        System.out.println("Enter the target of your goal: ");
+        String target = scanner.nextLine();
+
+        System.out.println("Has the goal been achieved? (y/n): ");
+        String achievedInput = scanner.nextLine().trim().toLowerCase();
+        boolean achieved = achievedInput.equals("y");
+
+        Goal newGoal = new Goal(description, target, achieved);
+
+        System.out.println("Goal added: " + newGoal.getDescription());
+}
+
+    // Option 6
     private static void updateGoal() {
     System.out.println("Enter your username: ");
     String username = scanner.nextLine();

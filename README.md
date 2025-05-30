@@ -20,7 +20,7 @@ Here are three examples from my code that demonstrate clean coding principles, s
 
 <!-- Screenshot: Meaningful Names Example -->  
 <p align="center">
-  <img src="screenshots/meaningful-names.jpg" alt="Meaningful Names Screenshot" width="600" />
+  <img src="screenshots/meaningful-names.jpg" alt="Meaningful Names Screenshot" width="600" height="300"/>
 </p>
 
 **Error Handling and Input Validation:**  
@@ -29,8 +29,8 @@ Here are three examples from my code that demonstrate clean coding principles, s
 
 <!-- Screenshots: Error Handling Example -->  
 <p align="center">
-  <img src="screenshots/error-handling1.jpg" alt="Error Handling Screenshot 1" width="600" />
-  <img src="screenshots/error-handling2.jpg" alt="Error Handling Screenshot 2" width="600" />
+  <img src="screenshots/error-handling-1.jpg" alt="Error Handling Screenshot 1" width="600" height="300" />
+  <img src="screenshots/error-handling-2.jpg" alt="Error Handling Screenshot 2" width="600" height="300"/>
 </p>
 
 **Encapsulation:**  
@@ -39,7 +39,7 @@ Here are three examples from my code that demonstrate clean coding principles, s
 
 <!-- Screenshot: Encapsulation Example -->  
 <p align="center">
-  <img src="screenshots/encapsulation.jpg" alt="Encapsulation Screenshot" width="600" />
+  <img src="screenshots/encapsulation.jpg" alt="Encapsulation Screenshot" width="600" height="300"/>
 </p>
 
 There are other examples, but I’m keeping this brief!  

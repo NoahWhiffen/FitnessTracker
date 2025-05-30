@@ -19,22 +19,28 @@ Here are three examples from my code that demonstrate clean coding principles, s
 - Variables like `workoutService`, `userService`, and `exercises` convey their purposes without ambiguity.  
 
 <!-- Screenshot: Meaningful Names Example -->  
-![Meaningful Names Screenshot](screenshots/meaningful-names.jpg) 
+<p align="center">
+  <img src="screenshots/meaningful-names.jpg" alt="Meaningful Names Screenshot" width="600" />
+</p>
 
 **Error Handling and Input Validation:**  
 - In `WorkoutService.addWorkout()`, an `IllegalArgumentException` is thrown if the workout type is empty or null.  
 - In `App.addWorkout()`, exceptions during user input parsing are caught, and clear error messages are provided.
 
 <!-- Screenshots: Error Handling Example -->  
-![Error Handling Screenshot](screenshots/error-handling-1.jpg)
-![Error Handling Screenshot](screenshots/error-handling-2.jpg)    
+<p align="center">
+  <img src="screenshots/error-handling1.jpg" alt="Error Handling Screenshot 1" width="600" />
+  <img src="screenshots/error-handling2.jpg" alt="Error Handling Screenshot 2" width="600" />
+</p>
 
 **Encapsulation:**  
 - Data models like `User`, `Workout`, `Exercise`, and `Goal` keep fields private and expose access through getter and setter methods.  
 - This protects the internal state of objects and enforces controlled access.
 
 <!-- Screenshot: Encapsulation Example -->  
-![Encapsulation Screenshot](screenshots/encapsulation.jpg)  
+<p align="center">
+  <img src="screenshots/encapsulation.jpg" alt="Encapsulation Screenshot" width="600" />
+</p>
 
 There are other examples, but I’m keeping this brief!  
 

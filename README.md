@@ -26,8 +26,8 @@ Here are three examples from my code that demonstrate clean coding principles, s
 - In `App.addWorkout()`, exceptions during user input parsing are caught, and clear error messages are provided.
 
 <!-- Screenshots: Error Handling Example -->  
-![Error Handling Screenshot](screenshots/error-handling1.jpg)
-![Error Handling Screenshot](screenshots/error-handling2.jpg)    
+![Error Handling Screenshot](screenshots/error-handling-1.jpg)
+![Error Handling Screenshot](screenshots/error-handling-2.jpg)    
 
 **Encapsulation:**  
 - Data models like `User`, `Workout`, `Exercise`, and `Goal` keep fields private and expose access through getter and setter methods.  

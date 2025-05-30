@@ -1,6 +1,6 @@
-# Fitness Tracker  
-## QAP 1 - Term 4  
-### Noah Whiffen - SD12  
+<h1 align="center">Fitness Tracker</h1>
+<h2 align="center">QAP 1 - Term 4</h2>
+<h3 align="center">Noah Whiffen - SD12</h3>
 
 ---
 

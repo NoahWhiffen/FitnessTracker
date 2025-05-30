@@ -43,7 +43,7 @@ public class App {
                     break;
                 case "0":
                     exit = true;
-                    System.out.println("Exiting program.");
+                    System.out.println("Exiting program. Thank you!");
                     break;
                 default:
                     System.out.println("Invalid choice. Try again.");
@@ -127,14 +127,15 @@ public class App {
     private static void viewAllWorkouts() {
         List<Workout> workouts = workoutService.getAllWorkouts();
         if (workouts.isEmpty()) {
+            System.out.println(); // blank line
             System.out.println("No workouts found.");
         } else {
             for (Workout workout : workouts) {
                 System.out.println("ID: " + workout.getWorkoutId()
-                                + " Date: " + workout.getDate() 
-                                + " Type: " + workout.getType()
-                                + " Duration (In Minutes): " + workout.getDuration()
-                                + " Exercises: " + workout.getExercises());
+                                + "| Date: " + workout.getDate() 
+                                + "| Type: " + workout.getType()
+                                + "| Duration (In Minutes): " + workout.getDuration()
+                                + "| Exercises: " + workout.getExercises());
             }
         }
     }
@@ -170,49 +171,73 @@ public class App {
 
         Goal newGoal = new Goal(description, target, achieved);
 
+        user.getGoals().add(newGoal);
         System.out.println("Goal added: " + newGoal.getDescription());
-}
+    }
 
     // Option 6
     private static void updateGoal() {
-    System.out.println("Enter your username: ");
-    String username = scanner.nextLine();
+        System.out.println("Enter your username: ");
+        String username = scanner.nextLine();
 
-    User user = userService.findUserByUsername(username);
+        User user = userService.findUserByUsername(username);
+        if (user == null) {
+            System.out.println("User not found.");
+            return;
+        }
 
-    if (user == null) {
-        System.out.println("User not found.");
-        return;
-    }
+        List<Goal> goals = user.getGoals();
+        if (goals.isEmpty()) {
+            System.out.println("No goals found for this user.");
+            return;
+        }
 
-    List<Goal> goals = user.getGoals();
-    if (goals.isEmpty()) {
-        System.out.println("No goals found for this user.");
-        return;
-    }
+        System.out.println("\n--- User Goals ---");
+        for (int i = 0; i < goals.size(); i++) {
+            Goal g = goals.get(i);
+            System.out.printf("%d. %s | Target: %s | Achieved: %s%n",
+                    i + 1, g.getDescription(), g.getTarget(), g.isAchieved());
+        }
 
-    Goal goal = goals.get(0); // Just editing the first goal for now
-    System.out.println("Current Goal Description: " + goal.getDescription());
-    System.out.println("Enter new description (leave blank to keep current): ");
-    String description = scanner.nextLine();
-    if (!description.trim().isEmpty()) {
-        goal.setDescription(description);
-    }
+        System.out.print("Enter the ID of the goal you want to update: ");
+        try {
+            int choice = Integer.parseInt(scanner.nextLine());
+            if (choice < 1 || choice > goals.size()) {
+                System.out.println("Invalid goal selection.");
+                return;
+            }
 
-    System.out.println("Current Target: " + goal.getTarget());
-    System.out.println("Enter new target (leave blank to keep current): ");
-    String target = scanner.nextLine();
-    if (!target.trim().isEmpty()) {
-        goal.setTarget(target);
-    }
+            Goal goal = goals.get(choice - 1);
 
-    System.out.println("Is the goal achieved? (true/false): ");
-    String achievedStr = scanner.nextLine();
-    if (!achievedStr.trim().isEmpty()) {
-        boolean achieved = Boolean.parseBoolean(achievedStr);
-        goal.setAchieved(achieved);
-    }
+            System.out.println("Current Goal Description: " + goal.getDescription());
+            System.out.print("Enter new description (leave blank to keep current): ");
+            String description = scanner.nextLine();
+            if (!description.trim().isEmpty()) {
+                goal.setDescription(description);
+            }
 
-    System.out.println("Goal updated successfully.");
+            System.out.println("Current Target: " + goal.getTarget());
+            System.out.print("Enter new target (leave blank to keep current): ");
+            String target = scanner.nextLine();
+            if (!target.trim().isEmpty()) {
+                goal.setTarget(target);
+            }
+
+            System.out.print("Is the goal achieved? (y/n or leave blank): ");
+            String achievedStr = scanner.nextLine().trim().toLowerCase();
+            if (!achievedStr.isEmpty()) {
+                if (achievedStr.equals("y")) {
+                    goal.setAchieved(true);
+                } else if (achievedStr.equals("n")) {
+                    goal.setAchieved(false);
+                } else {
+                    System.out.println("Invalid input. Please enter 'y' or 'n'. Keeping previous value.");
+                }
+            }
+
+            System.out.println("Goal updated successfully.");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+        }
     }
 }

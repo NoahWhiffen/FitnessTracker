@@ -35,4 +35,10 @@ public class Exercise {
     public void setSets(int sets) {
         this.sets = sets;
     }
+
+    // String method
+    @Override
+    public String toString() {
+        return String.format("%s (Sets: %d, Reps: %d)", name, sets, reps);
+    }
 }
